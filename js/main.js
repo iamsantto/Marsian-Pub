@@ -1,4 +1,10 @@
-
+var displayTip = function () {
+  var currencyA = document.getElementById('currencyA').value;
+  var currencyB = document.getElementById('currencyB').value;
+  var billAmount = document.getElementById('billAmount').value;
+  var result = tipCalculator(currencyA, currencyB, billAmount);
+  document.getElementById('result').innerHTML = "Calculated Tip : " + result;
+}
 
 // -------- Tip Calculator Fn
 var tipCalculator = function(currencyA, currencyB, billAmount){
@@ -17,10 +23,7 @@ var tipCalculator = function(currencyA, currencyB, billAmount){
     tipArray.push(sDivRem); // if not push the remainder value into an array
     hDiv--; // decrement the quotient value by 1 and repeat untill the all quotient values are checked
   }
-  
+
   var tip = Math.min(...tipArray); // find to min value from the array
   return tip; // return the smallest number which is the least tip
 };
-
-
- var tips = tipCalculator(9,6,48);
