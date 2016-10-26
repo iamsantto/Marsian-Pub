@@ -23,21 +23,30 @@ var validate = function(currenyA, currencyB, billAmount) {
 
 // -------- Tip Calculator Fn ----------
 var tipCalculator = function(currencyA, currencyB, billAmount){
-  var hCurrency = 0, sCurrency = 0;
+  var hCurrency = 0, sCurrency = 0, base=0;
   var tipArray = [];
 
-  currencyA > currencyB ? (hCurrency = currencyA, sCurrency = currencyB) : (hCurrency = currencyB, sCurrency = currencyA); // To get the Max currency
+  currencyA > currencyB ? (hCurrency = currencyA, sCurrency = currencyB) : (hCurrency = currencyB, sCurrency = currencyA); // To get the Max Denomination
 
-  var hDiv = Math.floor(billAmount/hCurrency); // divide the bill amt by max currency
-
-  while ((hDiv+1) != 0){
-    var hDivRem = billAmount - (hDiv * hCurrency); // find the remainder when divided my max currency
-    var sDivRem = hDivRem % sCurrency; // check if there's still a remainder
-    if (sDivRem == 0) return 0; // if no remainder, then tips is 0. Return it.
-    tipArray.push(sDivRem); // if not push the remainder value into an array
-    hDiv--; // decrement the quotient value by 1 and repeat untill the all quotient values are checked
+  if (billAmount < sCurrency) {
+    return (sCurrency - billAmount);
   }
 
-  var tip = Math.min(...tipArray); // find to min value from the array
-  return tip; // return the smallest number which is the least tip
+  var hDiv = Math.floor(billAmount/hCurrency); // divide the bill amt by max denomination
+
+  while ((hDiv+1) != 0){  // keep iterating untill hDiv becomes null
+    var hDivRem = billAmount - (hDiv * hCurrency); // find the remainder when divided my max denomination
+    var sDivRem = hDivRem % sCurrency; // check if there's still a remainder
+    if (sDivRem == 0) return 0; // if no remainder, then tips is 0. Return it.
+    var sDiv = Math.floor(hDivRem/sCurrency); // divide the remainder of max D by min D
+    var diff = billAmount - (hDivRem + (sDiv * sCurrency)); // find the difference
+    if (diff > base) {
+      base = diff; // if diff > base change base and save both the quotients
+      tipArray = [hDiv, sDiv];
+    }
+    hDiv--; // decrement the quotient value by 1
+  }
+
+  var tip = ((tipArray[0] * hCurrency) + ((tipArray[1] + 1) * sCurrency)) - billAmount; // finding tip from both the quotients
+  return tip; 
 };
