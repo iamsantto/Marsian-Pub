@@ -1,8 +1,8 @@
 // -------- To get input and display output ----------
 var displayTip = function () {
-  var currencyA = document.getElementById('currencyA').value;
-  var currencyB = document.getElementById('currencyB').value;
-  var billAmount = document.getElementById('billAmount').value;
+  var currencyA = parseInt(document.getElementById('currencyA').value);
+  var currencyB = parseInt(document.getElementById('currencyB').value);
+  var billAmount = parseInt(document.getElementById('billAmount').value);
 
   var validation = validate(currencyA, currencyB, billAmount); // validate the input boxes
 
@@ -30,9 +30,8 @@ var tipCalculator = function(currencyA, currencyB, billAmount){
 
   var hDiv = Math.floor(billAmount/hCurrency); // divide the bill amt by max currency
 
-  for ( var i = 0; i <= hDiv +1; i++){
+  while ((hDiv+1) != 0){
     var hDivRem = billAmount - (hDiv * hCurrency); // find the remainder when divided my max currency
-    var sDiv = Math.floor(hDivRem/sCurrency); // divide the remainder by the small currency
     var sDivRem = hDivRem % sCurrency; // check if there's still a remainder
     if (sDivRem == 0) return 0; // if no remainder, then tips is 0. Return it.
     tipArray.push(sDivRem); // if not push the remainder value into an array
