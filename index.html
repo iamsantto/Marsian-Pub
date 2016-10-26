@@ -1,18 +1,34 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <meta charset="utf-8">
     <title>Marsian Pub</title>
+    <link rel="stylesheet" href="css/style.css" media="screen" title="no title">
   </head>
+
   <body>
-    <label for="currencyA">Currency 1</label>
-    <input id="currencyA" type="number" name="currencyA" required><br>
-    <label for="currencyB">Currency 2</label>
-    <input id="currencyB" type="number" name="currencyB" required><br>
-    <label for="billAmount">Bill Amount</label>
-    <input id="billAmount" type="number" name="billAmount" required><br>
-    <button onclick="displayTip()">Calculate Tip</button><br>
-    <b><span id="result"></span></b>
+    <center>
+      <table>
+        <tr>
+          <td> <label for="currencyA">Denomination 1</label> </td>
+          <td> <input id="currencyA" type="number" name="currencyA" required><br><br> </td>
+        </tr>
+        <tr>
+          <td> <label for="currencyB">Denomination 2</label> </td>
+          <td> <input id="currencyB" type="number" name="currencyB" required><br><br> </td>
+        </tr>
+        <tr>
+          <td> <label for="billAmount">Bill Amount</label> </td>
+          <td> <input id="billAmount" type="number" name="billAmount" required><br><br> </td>
+        </tr>
+      </table>
+
+      <button onclick="displayTip()">Calculate Tip</button><br><br>
+      <b><span id="result"></span></b>
+    </center>
+
     <script src="js/main.js" charset="utf-8"></script>
   </body>
+
 </html>

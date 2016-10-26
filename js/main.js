@@ -1,12 +1,27 @@
+// -------- To get input and display output ----------
 var displayTip = function () {
   var currencyA = document.getElementById('currencyA').value;
   var currencyB = document.getElementById('currencyB').value;
   var billAmount = document.getElementById('billAmount').value;
-  var result = tipCalculator(currencyA, currencyB, billAmount);
-  document.getElementById('result').innerHTML = "Calculated Tip : " + result;
+
+  var validation = validate(currencyA, currencyB, billAmount); // validate the input boxes
+
+  if (validation) {
+    var result = tipCalculator(currencyA, currencyB, billAmount);
+    document.getElementById('result').innerHTML = "Calculated Tip : " + result; // add result to DOM
+  }
 }
 
-// -------- Tip Calculator Fn
+// -------- Validation Fn ----------
+var validate = function(currenyA, currencyB, billAmount) {
+  if (!!currenyA && !!currencyB && !!billAmount) {
+    return true;
+  }
+  window.alert("Please enter a valid number!");
+  return false;
+}
+
+// -------- Tip Calculator Fn ----------
 var tipCalculator = function(currencyA, currencyB, billAmount){
   var hCurrency = 0, sCurrency = 0;
   var tipArray = [];
