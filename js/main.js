@@ -35,11 +35,12 @@ var tipCalculator = function(currencyA, currencyB, billAmount){
   var hDiv = Math.floor(billAmount/hCurrency); // divide the bill amt by max denomination
 
   while ((hDiv+1) != 0){  // keep iterating untill hDiv becomes null
-    var hDivRem = billAmount - (hDiv * hCurrency); // find the remainder when divided my max denomination
+    var hDivQ = hDiv * hCurrency;
+    var hDivRem = billAmount - hDivQ; // find the remainder when divided my max denomination
     var sDivRem = hDivRem % sCurrency; // check if there's still a remainder
     if (sDivRem == 0) return 0; // if no remainder, then tips is 0. Return it.
     var sDiv = Math.floor(hDivRem/sCurrency); // divide the remainder of max D by min D
-    var diff = billAmount - (hDivRem + (sDiv * sCurrency)); // find the difference
+    var diff = billAmount - (hDivQ + (sDiv * sCurrency)); // find the difference
     if (diff > base) {
       base = diff; // if diff > base change base and save both the quotients
       tipArray = [hDiv, sDiv];
@@ -48,5 +49,5 @@ var tipCalculator = function(currencyA, currencyB, billAmount){
   }
 
   var tip = ((tipArray[0] * hCurrency) + ((tipArray[1] + 1) * sCurrency)) - billAmount; // finding tip from both the quotients
-  return tip; 
+  return tip;
 };
